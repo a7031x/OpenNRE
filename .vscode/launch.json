@@ -33,6 +33,15 @@
             "args": [
                 "-model_name", "pcnn_att"
             ]
+        },
+        {
+            "name": "plot",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/draw_plot.py",
+            "args": [
+                "pcnn_att"
+            ]
         }
     ]
 }
