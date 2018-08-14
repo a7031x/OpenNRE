@@ -12,7 +12,17 @@ def pcnn_att(is_training):
     word_embedding = framework.embedding.word_embedding()
     pos_embedding = framework.embedding.pos_embedding()
     embedding = framework.embedding.concat_embedding(word_embedding, pos_embedding)
+    # PCNN. Appoint activation to whatever activation function you want to use.
+    # There are three more encoders:
+    #     framework.encoder.cnn
+    #     framework.encoder.rnn
+    #     framework.encoder.birnn
     x = framework.encoder.pcnn(embedding, FLAGS.hidden_size, framework.mask, activation=tf.nn.relu)
+    # Selective attention. Setting parameter dropout_before=True means using dropout before attention. 
+    # There are three more selecting method
+    #     framework.selector.maximum
+    #     framework.selector.average
+    #     framework.selector.no_bag
     logit, repre = framework.selector.attention(x, framework.scope, framework.label_for_select)
 
     if is_training:
